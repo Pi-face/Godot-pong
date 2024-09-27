@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://vvwlpkqp274x"]
+
+[ext_resource type="Texture2D" uid="uid://bk1k6do03b8mg" path="res://assets/board.png" id="1_7k6ye"]
+[ext_resource type="Texture2D" uid="uid://86j32cuwjuna" path="res://assets/Ball.png" id="2_fpmcc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4s6yl"]
+
+[node name="Pong" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7k6ye")
+offset = Vector2(640, 321)
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2(640, 320)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_4s6yl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("2_fpmcc")
