@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://vvwlpkqp274x"]
+[gd_scene load_steps=13 format=3 uid="uid://vvwlpkqp274x"]
 
 [ext_resource type="Texture2D" uid="uid://bk1k6do03b8mg" path="res://assets/board.png" id="1_7k6ye"]
+[ext_resource type="Script" path="res://scripts/Ball.cs" id="2_cslw2"]
 [ext_resource type="Texture2D" uid="uid://86j32cuwjuna" path="res://assets/Ball.png" id="2_fpmcc"]
 [ext_resource type="Texture2D" uid="uid://c6iychg53e827" path="res://assets/Paddle.png" id="3_5qdkn"]
 [ext_resource type="AudioStream" uid="uid://c5q7myx7adank" path="res://assets/bounce.mp3" id="3_bvghf"]
@@ -30,6 +31,7 @@ offset = Vector2(640, 321)
 
 [node name="Ball" type="Area2D" parent="."]
 position = Vector2(640, 320)
+script = ExtResource("2_cslw2")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]

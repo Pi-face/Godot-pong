@@ -20,3 +20,4 @@ mono_crash.*.json
 
 #macOS
 .DS_Store
+qodana.yaml
