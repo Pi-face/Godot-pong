@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vvwlpkqp274x"]
+[gd_scene load_steps=15 format=3 uid="uid://vvwlpkqp274x"]
 
 [ext_resource type="Texture2D" uid="uid://bk1k6do03b8mg" path="res://assets/board.png" id="1_7k6ye"]
 [ext_resource type="Script" path="res://scripts/Ball.cs" id="2_cslw2"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dcunqon7om6dg" path="res://assets/music.mp3" id="4_ul81q"]
 [ext_resource type="AudioStream" uid="uid://dveptfbnv6448" path="res://assets/player_score.mp3" id="5_c3isb"]
 [ext_resource type="AudioStream" uid="uid://d0vd8p3c12kp2" path="res://assets/enemy_score.mp3" id="6_vcr35"]
+[ext_resource type="Script" path="res://scripts/Rail.cs" id="8_jrk2x"]
+[ext_resource type="Script" path="res://scripts/Wall.cs" id="9_tvdgo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4s6yl"]
 
@@ -72,24 +74,32 @@ texture = ExtResource("3_5qdkn")
 stream = ExtResource("6_vcr35")
 
 [node name="Top" type="Area2D" parent="."]
+script = ExtResource("8_jrk2x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
 position = Vector2(640, -9)
 shape = SubResource("RectangleShape2D_rc10c")
 
 [node name="Bottom" type="Area2D" parent="."]
+script = ExtResource("8_jrk2x")
+bounceDirection = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
 position = Vector2(641, 652)
 shape = SubResource("RectangleShape2D_rc10c")
 
-[node name="Left" type="Area2D" parent="."]
+[node name="Left" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
+script = ExtResource("9_tvdgo")
+BallResetDirection = Vector2(1, 0)
+Scorer = NodePath("../Player 2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
 position = Vector2(-13, 325)
 shape = SubResource("RectangleShape2D_lw0ox")
 
-[node name="Right" type="Area2D" parent="."]
+[node name="Right" type="Area2D" parent="." node_paths=PackedStringArray("Scorer")]
+script = ExtResource("9_tvdgo")
+Scorer = NodePath("../Player 1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
 position = Vector2(1292, 324)
@@ -120,3 +130,8 @@ text = "[center][wave amp=50 freq=3]PAUSED[/wave][/center]"
 [node name="Theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ul81q")
 autoplay = true
+
+[connection signal="area_entered" from="Top" to="Top" method="OnAreaEntered"]
+[connection signal="area_entered" from="Bottom" to="Bottom" method="OnAreaEntered"]
+[connection signal="area_entered" from="Left" to="Left" method="OnAreaEntered"]
+[connection signal="area_entered" from="Right" to="Right" method="OnAreaEntered"]
